@@ -179,4 +179,28 @@ Events:
   Normal  Started    14h   kubelet            Started container nginx
 ```
 
-4.1  
+4.1 Trazendo os *PODS* que estao em UK
+
+`# kubectl get pods -n default -l dc=UK`
+
+```bash
+NAME                                  READY   STATUS    RESTARTS   AGE
+primeiro-deployment-57c778d58-4s8gg   1/1     Running   0          41m
+```
+
+4.2 Filtrando por coluna os labels:
+
+`# kubectl get pods -n default -L dc`
+
+```bash
+NAME                                  READY   STATUS    RESTARTS   AGE   DC
+nginx                                 1/1     Running   0          39h
+nginx-85b98978db-ktkxq                1/1     Running   0          39h
+nginx-85b98978db-pzhlf                1/1     Running   0          14h
+nginx-85b98978db-srpr6                1/1     Running   0          14h
+nginx-85b98978db-w49lb                1/1     Running   0          14h
+nginx-85b98978db-wt4kg                1/1     Running   0          14h
+primeiro-deployment-57c778d58-4s8gg   1/1     Running   0          42m   UK
+```
+
+4.3 
