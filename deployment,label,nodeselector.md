@@ -188,7 +188,7 @@ NAME                                  READY   STATUS    RESTARTS   AGE
 primeiro-deployment-57c778d58-4s8gg   1/1     Running   0          41m
 ```
 
-4.2 Filtrando por coluna os labels:
+4.2 Filtrando por coluna os labels, veja que ele criou uma coluna adicional;
 
 `# kubectl get pods -n default -L dc`
 
@@ -203,4 +203,17 @@ nginx-85b98978db-wt4kg                1/1     Running   0          14h
 primeiro-deployment-57c778d58-4s8gg   1/1     Running   0          42m   UK
 ```
 
-4.3 
+4.3 Para filtrar todos os labels de um node em especifico:
+
+`# kubectl label nodes k8snode01 --list `
+
+```bash
+kubernetes.io/os=linux
+beta.kubernetes.io/arch=amd64   
+beta.kubernetes.io/os=linux     
+kubernetes.io/arch=amd64        
+kubernetes.io/hostname=k8snode01
+```
+4.4 Montando mais um *deployment*:
+
+`# kubectl create -f terceiro-deployment.yaml`
