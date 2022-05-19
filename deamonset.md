@@ -25,6 +25,8 @@ spec:
         image: nginx:1.7.9
         ports:
         - containerPort: 80
+  updateStrategy:
+    type: RollingUpdate
 ```
 
 1.1 Para que possamos criar:
@@ -76,3 +78,50 @@ REVISION  CHANGE-CAUSE
 2         <none>
 ```
 
+2.1 Vamos agora saber mais detalhes da revisao 1:
+
+```bash
+# kubectl rollout history daemonset quarto-daemonset --revision=1
+daemonset.apps/quarto-daemonset with revision #1
+Pod Template:
+  Labels:       name=fluentd-elasticsearch
+  Containers:
+   nginx:
+    Image:      nginx:1.7.9
+    Port:       80/TCP
+    Host Port:  0/TCP
+    Environment:        <none>
+    Mounts:     <none>
+  Volumes:      <none>
+```
+
+2.2 Veja que eu tenho duas revisoes ou versoes desse daemonset:
+
+```bash
+# kubectl rollout history daemonset quarto-daemonset --revision=2
+daemonset.apps/quarto-daemonset with revision #2
+Pod Template:
+  Labels:       name=fluentd-elasticsearch
+  Containers:
+   nginx:
+    Image:      nginx:1.15.0
+    Port:       80/TCP
+    Host Port:  0/TCP
+    Environment:        <none>
+    Mounts:     <none>
+  Volumes:      <none>
+```
+
+2.3 Agora vamos voltar na versao da revisao 1 que estava anteriormente:
+
+```bash
+# kubectl rollout undo daemonset quarto-daemonset --to-revision=1
+daemonset.apps/quarto-daemonset rolled back
+```
+
+2.4 Precisando verificar que para que possamos trabalhar de forma legal com o atualizao de imagens precisamos de uma feature no codigo.
+
+```yml
+updateStrategy:
+  type: RollingUpdate
+```
