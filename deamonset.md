@@ -31,3 +31,13 @@ spec:
 
 `# kubectl create -f quarto_daemonset.yml`
 
+1.2 Vamos agora analisar a saia do comando do daemonset:
+
+```bash
+ kubectl get daemonsets.apps 
+NAME               DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+quarto-daemonset   2         2         2       2            2           <none>          4s
+```
+
+
+
